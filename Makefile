@@ -46,6 +46,28 @@ JDK_ORACLE_18_X64=https://download.oracle.com/java/18/latest/jdk-18_macos-x64_bi
 JDK_OPENJDK_18_ARM=https://download.java.net/java/GA/jdk18/43f95e8614114aeaa8e8a5fcf20a682d/36/GPL/openjdk-18_macos-aarch64_bin.tar.gz
 JDK_OPENJDK_18_X64=https://download.java.net/java/GA/jdk18/43f95e8614114aeaa8e8a5fcf20a682d/36/GPL/openjdk-18_macos-x64_bin.tar.gz
 
+JDK_ORACLE_8U321=https://javadl.oracle.com/webapps/download/GetFile/1.8.0_321-b07/df5ad55fdd604472a86a45a217032c7d/unix-i586/jdk-8u321-macosx-x64.dmg
+JDK_ORACLE_8U321_DOWNLOADED=.downloads/jdk-8u321-macosx-x64.dmg
+
+JDK_ORACLE_8U321_HOME=.jdks/oracle_8u321/Contents/Home
+
+${JDK_ORACLE_8U321_DOWNLOADED}:
+	mkdir -p .downloads
+	wget -P .downloads ${JDK_ORACLE_8U321}
+
+${JDK_ORACLE_8U321_HOME}: ${JDK_ORACLE_8U321_DOWNLOADED}
+	7z x ${JDK_ORACLE_8U321_DOWNLOADED} -otmp
+	cd tmp && xar -xf "JDK 8 Update 321/JDK 8 Update 321.pkg"
+	mkdir -p .jdks/oracle_8u321
+	tar xf tmp/jdk1.8.0_321.pkg/Payload --directory=.jdks/oracle_8u321
+
+test_8u321: export JAVA_HOME=$(abspath $(JDK_ORACLE_8U321_HOME))
+test_8u321: export PATH=${JAVA_HOME}/bin:$(shell printenv PATH)
+test_8u321: ${JDK_ORACLE_8U321_HOME}
+	file `which java`
+	java -version
+	make gremlin-console
+
 #####
 
 .PHONY: gremlin gremlin-console-local neptune gremlin-console-neptune gremlin-load-local-data TIMESTAMP deploy-uat-with-ci

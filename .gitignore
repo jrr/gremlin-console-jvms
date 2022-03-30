@@ -1,2 +1,5 @@
 .gremlin-console
 *.tar.gz
+*.dmg
+.jdks
+tmp
