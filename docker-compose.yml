@@ -1,0 +1,6 @@
+version: "2"
+services:
+  gremlin-server:
+    image: registry.gitlab.com/pixelberry/sprout/pb-graph-server/ci-dependencies/tinkergraph:3.5.0
+    ports:
+      - "8182:8182"
