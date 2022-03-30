@@ -19,7 +19,7 @@ GREMLIN_SH=${DOWNLOAD_DIR}/${GREMLIN_RENAMED}/bin/gremlin.sh
 
 ${GREMLIN_SH}:
 	mkdir -p ${DOWNLOAD_DIR}
-	wget ${GREMLIN_ZIP_URL} -O ${DOWNLOADED_GREMLIN_ZIP}
+	wget -q ${GREMLIN_ZIP_URL} -O ${DOWNLOADED_GREMLIN_ZIP}
 	file ${DOWNLOADED_GREMLIN_ZIP}
 	unzip -q ${DOWNLOADED_GREMLIN_ZIP} -d ${DOWNLOAD_DIR}
 	# give it a version-independent name so we can add it to PATH with direnv:
@@ -45,7 +45,7 @@ JDK_ORACLE_18_ARM=https://download.oracle.com/java/18/latest/jdk-18_macos-aarch6
 JDK_ORACLE_18_ARM_DOWNLOADED=.downloads/jdk-18_macos-aarch64_bin.tar.gz
 ${JDK_ORACLE_18_ARM_DOWNLOADED}:
 	mkdir -p .downloads
-	wget -P .downloads ${JDK_ORACLE_18_ARM}
+	wget -q -P .downloads ${JDK_ORACLE_18_ARM}
 
 JDK_ORACLE_18_ARM_HOME=.jdks/oracle_18_arm/jdk-18.jdk/Contents/Home
 ${JDK_ORACLE_18_ARM_HOME}: ${JDK_ORACLE_18_ARM_DOWNLOADED}
@@ -64,7 +64,7 @@ JDK_ORACLE_18_X64=https://download.oracle.com/java/18/latest/jdk-18_macos-x64_bi
 JDK_ORACLE_18_X64_DOWNLOADED=.downloads/jdk-18_macos-x64_bin.tar.gz
 ${JDK_ORACLE_18_X64_DOWNLOADED}:
 	mkdir -p .downloads
-	wget -P .downloads ${JDK_ORACLE_18_X64}
+	wget -q -P .downloads ${JDK_ORACLE_18_X64}
 
 JDK_ORACLE_18_X64_HOME=.jdks/oracle_18_x64/jdk-18.jdk/Contents/Home
 ${JDK_ORACLE_18_X64_HOME}: ${JDK_ORACLE_18_X64_DOWNLOADED}
@@ -84,7 +84,7 @@ JDK_OPENJDK_18_X64=https://download.java.net/java/GA/jdk18/43f95e8614114aeaa8e8a
 JDK_OPENJDK_18_X64_DOWNLOADED=.downloads/openjdk-18_macos-x64_bin.tar.gz
 ${JDK_OPENJDK_18_X64_DOWNLOADED}:
 	mkdir -p .downloads
-	wget -P .downloads ${JDK_OPENJDK_18_X64}
+	wget -q -P .downloads ${JDK_OPENJDK_18_X64}
 
 JDK_OPENJDK_18_X64_HOME=.jdks/openjdk_18_x64/jdk-18.jdk/Contents/Home
 ${JDK_OPENJDK_18_X64_HOME}: ${JDK_OPENJDK_18_X64_DOWNLOADED}
@@ -104,7 +104,7 @@ JDK_OPENJDK_18_ARM=https://download.java.net/java/GA/jdk18/43f95e8614114aeaa8e8a
 JDK_OPENJDK_18_ARM_DOWNLOADED=.downloads/openjdk-18_macos-aarch64_bin.tar.gz
 ${JDK_OPENJDK_18_ARM_DOWNLOADED}:
 	mkdir -p .downloads
-	wget -P .downloads ${JDK_OPENJDK_18_ARM}
+	wget -q -P .downloads ${JDK_OPENJDK_18_ARM}
 
 JDK_OPENJDK_18_ARM_HOME=.jdks/openjdk_18_arm/jdk-18.jdk/Contents/Home
 ${JDK_OPENJDK_18_ARM_HOME}: ${JDK_OPENJDK_18_ARM_DOWNLOADED}
@@ -125,7 +125,7 @@ JDK_ORACLE_8U321_HOME=.jdks/oracle_8u321/Contents/Home
 
 ${JDK_ORACLE_8U321_DOWNLOADED}:
 	mkdir -p .downloads
-	wget -P .downloads ${JDK_ORACLE_8U321}
+	wget -q -P .downloads ${JDK_ORACLE_8U321}
 
 ${JDK_ORACLE_8U321_HOME}: ${JDK_ORACLE_8U321_DOWNLOADED}
 	7z x ${JDK_ORACLE_8U321_DOWNLOADED} -otmp

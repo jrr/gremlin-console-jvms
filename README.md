@@ -10,17 +10,6 @@ To download and run Gremlin Console, `make gremlin-console`. Here's what it look
 jrr@jrrmbp ~/r/gremlin-console-jvms (main)> make gremlin-console
 mkdir -p .gremlin-console
 wget https://ftp.wayne.edu/apache/tinkerpop/3.5.2/apache-tinkerpop-gremlin-console-3.5.2-bin.zip -O .gremlin-console/apache-tinkerpop-gremlin-console-3.5.2-bin.zip
---2022-03-30 10:14:36--  https://ftp.wayne.edu/apache/tinkerpop/3.5.2/apache-tinkerpop-gremlin-console-3.5.2-bin.zip
-Resolving ftp.wayne.edu (ftp.wayne.edu)... 141.217.0.199
-Connecting to ftp.wayne.edu (ftp.wayne.edu)|141.217.0.199|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 97930338 (93M) [application/zip]
-Saving to: ‘.gremlin-console/apache-tinkerpop-gremlin-console-3.5.2-bin.zip’
-
-.gremlin-console/apache-tinkerpop-gremlin- 100%[======================================================================================>]  93.39M  75.8MB/s    in 1.2s    
-
-2022-03-30 10:14:37 (75.8 MB/s) - ‘.gremlin-console/apache-tinkerpop-gremlin-console-3.5.2-bin.zip’ saved [97930338/97930338]
-
 file .gremlin-console/apache-tinkerpop-gremlin-console-3.5.2-bin.zip
 .gremlin-console/apache-tinkerpop-gremlin-console-3.5.2-bin.zip: Zip archive data, at least v1.0 to extract, compression method=store
 unzip -q .gremlin-console/apache-tinkerpop-gremlin-console-3.5.2-bin.zip -d .gremlin-console
