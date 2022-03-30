@@ -39,16 +39,88 @@ gremlin-console-neptune: ${GREMLIN_SH}
 	${GREMLIN_SH} -i gremlin/gremlin-neptune.groovy
 
 
-##### more JVMs
+## Oracle ARM
 
 JDK_ORACLE_18_ARM=https://download.oracle.com/java/18/latest/jdk-18_macos-aarch64_bin.tar.gz
-JDK_ORACLE_18_X64=https://download.oracle.com/java/18/latest/jdk-18_macos-x64_bin.tar.gz
-JDK_OPENJDK_18_ARM=https://download.java.net/java/GA/jdk18/43f95e8614114aeaa8e8a5fcf20a682d/36/GPL/openjdk-18_macos-aarch64_bin.tar.gz
-JDK_OPENJDK_18_X64=https://download.java.net/java/GA/jdk18/43f95e8614114aeaa8e8a5fcf20a682d/36/GPL/openjdk-18_macos-x64_bin.tar.gz
+JDK_ORACLE_18_ARM_DOWNLOADED=.downloads/jdk-18_macos-aarch64_bin.tar.gz
+${JDK_ORACLE_18_ARM_DOWNLOADED}:
+	mkdir -p .downloads
+	wget -P .downloads ${JDK_ORACLE_18_ARM}
 
+JDK_ORACLE_18_ARM_HOME=.jdks/oracle_18_arm/jdk-18.jdk/Contents/Home
+${JDK_ORACLE_18_ARM_HOME}: ${JDK_ORACLE_18_ARM_DOWNLOADED}
+	mkdir -p .jdks/oracle_18_arm
+	tar xfz ${JDK_ORACLE_18_ARM_DOWNLOADED} --directory=.jdks/oracle_18_arm
+
+test_oracle_18_arm: export JAVA_HOME=$(abspath $(JDK_ORACLE_18_ARM_HOME))
+test_oracle_18_arm: export PATH=${JAVA_HOME}/bin:$(shell printenv PATH)
+test_oracle_18_arm: ${JDK_ORACLE_18_ARM_HOME}
+	file `which java`
+	java -version
+	make gremlin-console
+
+## Oracle x64
+JDK_ORACLE_18_X64=https://download.oracle.com/java/18/latest/jdk-18_macos-x64_bin.tar.gz
+JDK_ORACLE_18_X64_DOWNLOADED=.downloads/jdk-18_macos-x64_bin.tar.gz
+${JDK_ORACLE_18_X64_DOWNLOADED}:
+	mkdir -p .downloads
+	wget -P .downloads ${JDK_ORACLE_18_X64}
+
+JDK_ORACLE_18_X64_HOME=.jdks/oracle_18_x64/jdk-18.jdk/Contents/Home
+${JDK_ORACLE_18_X64_HOME}: ${JDK_ORACLE_18_X64_DOWNLOADED}
+	mkdir -p .jdks/oracle_18_x64
+	tar xfz ${JDK_ORACLE_18_X64_DOWNLOADED} --directory=.jdks/oracle_18_x64
+
+test_oracle_18_x64: export JAVA_HOME=$(abspath $(JDK_ORACLE_18_X64_HOME))
+test_oracle_18_x64: export PATH=${JAVA_HOME}/bin:$(shell printenv PATH)
+test_oracle_18_x64: ${JDK_ORACLE_18_X64_HOME}
+	file `which java`
+	java -version
+	make gremlin-console
+
+## OpenJDK x64
+
+JDK_OPENJDK_18_X64=https://download.java.net/java/GA/jdk18/43f95e8614114aeaa8e8a5fcf20a682d/36/GPL/openjdk-18_macos-x64_bin.tar.gz
+JDK_OPENJDK_18_X64_DOWNLOADED=.downloads/openjdk-18_macos-x64_bin.tar.gz
+${JDK_OPENJDK_18_X64_DOWNLOADED}:
+	mkdir -p .downloads
+	wget -P .downloads ${JDK_OPENJDK_18_X64}
+
+JDK_OPENJDK_18_X64_HOME=.jdks/openjdk_18_x64/jdk-18.jdk/Contents/Home
+${JDK_OPENJDK_18_X64_HOME}: ${JDK_OPENJDK_18_X64_DOWNLOADED}
+	mkdir -p .jdks/openjdk_18_x64
+	tar xfz ${JDK_OPENJDK_18_X64_DOWNLOADED} --directory=.jdks/openjdk_18_x64
+
+test_openjdk_18_x64: export JAVA_HOME=$(abspath $(JDK_OPENJDK_18_X64_HOME))
+test_openjdk_18_x64: export PATH=${JAVA_HOME}/bin:$(shell printenv PATH)
+test_openjdk_18_x64: ${JDK_OPENJDK_18_X64_HOME}
+	file `which java`
+	java -version
+	make gremlin-console
+
+## OpenJDK ARM
+
+JDK_OPENJDK_18_ARM=https://download.java.net/java/GA/jdk18/43f95e8614114aeaa8e8a5fcf20a682d/36/GPL/openjdk-18_macos-aarch64_bin.tar.gz
+JDK_OPENJDK_18_ARM_DOWNLOADED=.downloads/openjdk-18_macos-aarch64_bin.tar.gz
+${JDK_OPENJDK_18_ARM_DOWNLOADED}:
+	mkdir -p .downloads
+	wget -P .downloads ${JDK_OPENJDK_18_ARM}
+
+JDK_OPENJDK_18_ARM_HOME=.jdks/openjdk_18_arm/jdk-18.jdk/Contents/Home
+${JDK_OPENJDK_18_ARM_HOME}: ${JDK_OPENJDK_18_ARM_DOWNLOADED}
+	mkdir -p .jdks/openjdk_18_arm
+	tar xfz ${JDK_OPENJDK_18_ARM_DOWNLOADED} --directory=.jdks/openjdk_18_arm
+
+test_openjdk_18_arm: export JAVA_HOME=$(abspath $(JDK_OPENJDK_18_ARM_HOME))
+test_openjdk_18_arm: export PATH=${JAVA_HOME}/bin:$(shell printenv PATH)
+test_openjdk_18_arm: ${JDK_OPENJDK_18_ARM_HOME}
+	file `which java`
+	java -version
+	make gremlin-console
+
+## Oracle 8u321
 JDK_ORACLE_8U321=https://javadl.oracle.com/webapps/download/GetFile/1.8.0_321-b07/df5ad55fdd604472a86a45a217032c7d/unix-i586/jdk-8u321-macosx-x64.dmg
 JDK_ORACLE_8U321_DOWNLOADED=.downloads/jdk-8u321-macosx-x64.dmg
-
 JDK_ORACLE_8U321_HOME=.jdks/oracle_8u321/Contents/Home
 
 ${JDK_ORACLE_8U321_DOWNLOADED}:
@@ -70,4 +142,4 @@ test_8u321: ${JDK_ORACLE_8U321_HOME}
 
 #####
 
-.PHONY: gremlin gremlin-console-local neptune gremlin-console-neptune gremlin-load-local-data TIMESTAMP deploy-uat-with-ci
+.PHONY: download-gremlin-console gremlin-console gremlin-console-local gremlin-console-neptune test_oracle_18_arm test_openjdk_18_x64 test_openjdk_18_arm test_8u321
