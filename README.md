@@ -215,21 +215,25 @@ make[1]: *** [gremlin-console] Error 1
 make: *** [test_openjdk_18_x64] Error 2
 ```
 
-## Working version - Java 8 update 321
+## Working versions - Java 8, 11
 
-I haven't tested every version of Java out there, but here's one that I know works on M1. Test it with `make test_8u321`:
+I haven't tested every version of Java out there, but here are two that I know works on M1. Test with `make test_openjdk_11_x64` or `make test_oracle_8_x64`:
 
 ```
-jrr@jrrmbp ~/r/gremlin-console-jvms (main) [2]> make test_8u321 
-(...)
+jrr@jrrmbp ~/r/gremlin-console-jvms (main) > make test_openjdk_11_x64
 file `which java`
-/Users/jrr/repos/gremlin-console-jvms/.jdks/oracle_8u321/Contents/Home/bin/java: Mach-O 64-bit executable x86_64
+/Users/jrr/repos/gremlin-console-jvms/.jdks/openjdk_11_x64/jdk-11.0.2.jdk/Contents/Home/bin/java: Mach-O 64-bit executable x86_64
 java -version
-java version "1.8.0_321"
-Java(TM) SE Runtime Environment (build 1.8.0_321-b07)
-Java HotSpot(TM) 64-Bit Server VM (build 25.321-b07, mixed mode)
+openjdk version "11.0.2" 2019-01-15
+OpenJDK Runtime Environment 18.9 (build 11.0.2+9)
+OpenJDK 64-Bit Server VM 18.9 (build 11.0.2+9, mixed mode)
 make gremlin-console
 .gremlin-console/apache-tinkerpop-gremlin-console/bin/gremlin.sh
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by org.codehaus.groovy.reflection.CachedClass (file:/Users/jrr/repos/gremlin-console-jvms/.gremlin-console/apache-tinkerpop-gremlin-console/lib/groovy-2.5.14-indy.jar) to method java.lang.Object.finalize()
+WARNING: Please consider reporting this to the maintainers of org.codehaus.groovy.reflection.CachedClass
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
 
          \,,,/
          (o o)
